@@ -12,7 +12,7 @@ program.arguments('<port>')
     let command;
 
     if (isWin) {
-      command = `netstat -aon | find ":${port}" | find "LISTENING"`;
+      command = `netstat -aon | find ":${port} " | find "LISTENING"`;
     } else {
       command = `lsof -i :${port} | awk '{ print $2; }' | head -n 2 | grep -v PID`;
     }
