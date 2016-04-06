@@ -18,7 +18,7 @@ program.arguments('<port>')
       if (isWin) {
         command = `netstat -aon | find ":${port} " | find "LISTENING"`;
       } else {
-        command = `sudo lsof -i :${port} -n -P | grep 'LISTEN' | awk '{ print $2; }' | head -n 2 | grep -v PID`;
+        command = `lsof -i :${port} -n -P | grep 'LISTEN' | awk '{ print $2; }' | head -n 2 | grep -v PID`;
       }
 
       const res = exec(command, { silent: true });
@@ -47,7 +47,7 @@ program.arguments('<port>')
           if (isWin) {
             killResult = exec(`taskkill /PID ${pid}`);
           } else {
-            killResult = exec(`sudo kill -9 ${pid.join(' ')}`);
+            killResult = exec(`kill -9 ${pid.join(' ')}`);
           }
 
           if (killResult.code === 0) {
@@ -57,7 +57,7 @@ program.arguments('<port>')
           }
         }
       } else if (res.code === 1){
-        console.log("No process found which uses port " + port);
+        console.log("No process found which uses port " + port + ". Maybe you need to try as root.");
       }
     });
   })

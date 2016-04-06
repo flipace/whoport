@@ -29,6 +29,10 @@ whoport 9090
 whoport 9090 -k
 ```
 
+### FAQ
+#### No process found but something is listening. (OSX)
+You need to execute whoport with sudo if a process runs via another or root user. Also see [man lsof](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man8/lsof.8.html) section "Security".
+
 ### Contributing
 
 Pull Requests are very welcome!

@@ -1,5 +1,8 @@
 # Change Log
 
+### v0.1.1
+- removes sudo from osx commands and adds information about lsof security restrictions to readme ([#2](https://github.com/flipace/whoport/issues/2))
+
 ### v0.1.0
 - adds confirm input to easily kill a process without providing -k.
 - improves & colors output of PID information
