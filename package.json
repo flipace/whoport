@@ -1,6 +1,6 @@
 {
   "name": "whoport",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A simple cli tool to help you identify and kill processes which use a given port.",
   "repository": {
     "type": "git",
@@ -16,6 +16,9 @@
     "whoport": "./index.js"
   },
   "dependencies": {
+    "chalk": "^1.1.3",
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
     "commander": "^2.9.0",
     "shelljs": "^0.6.0"
   }
