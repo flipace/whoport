@@ -11,6 +11,7 @@ A simple CLI tool to check if and which PID uses a given port number and optiona
 **Tested on:**
 - OSX 10.10.5, 10.11.4
 - Windows 7
+- Debian 7.8 (wheezy)
 
 Due to the use of ```netstat``` for Windows operating systems, whoport should also work on Windows Vista and above. (thanks [@lewisje](https://github.com/lewisje) for the hint!)
 
