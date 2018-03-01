@@ -27,8 +27,12 @@ program.arguments('<port>')
         let pid = res.output.trim();
 
         if (isWin) {
-          const args = pid.split(/\s+/g);
-          pid = args.pop();
+          let lines = pid.split(/\r\n/g);
+          pid = [];
+          for(var line of lines) {
+            const args = line.split(/\s+/g);
+            pid.push(args.pop());
+          }
         } else {
           pid = pid.split(/\s+/g);
         }
@@ -45,7 +49,7 @@ program.arguments('<port>')
           let killResult;
 
           if (isWin) {
-            killResult = exec(`taskkill /PID ${pid}`);
+            killResult = exec(`taskkill /PID ${pid.join(' /PID ')} /T /F`);
           } else {
             killResult = exec(`kill -9 ${pid.join(' ')}`);
           }
