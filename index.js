@@ -27,8 +27,14 @@ program.arguments('<port>')
         let pid = res.output.trim();
 
         if (isWin) {
-          const args = pid.split(/\s+/g);
-          pid = args.pop();
+          let lines = pid.split(/\r\n/g);
+          pid = [];
+          for(var line of lines) {
+            let pinfo = line.split(/\s+/g);
+            let id = pinfo.pop();
+            if(pid.indexOf(id) == -1)
+              pid.push(id);
+          }
         } else {
           pid = pid.split(/\s+/g);
         }
@@ -45,7 +51,7 @@ program.arguments('<port>')
           let killResult;
 
           if (isWin) {
-            killResult = exec(`taskkill /PID ${pid}`);
+            killResult = exec(`taskkill /PID ${pid.join(' /PID ')} /T /F`);
           } else {
             killResult = exec(`kill -9 ${pid.join(' ')}`);
           }
@@ -53,7 +59,7 @@ program.arguments('<port>')
           if (killResult.code === 0) {
             console.log(chalk.green('Process(es) killed.'));
           } else {
-            console.log(chalk.yellow('Process(es) couldn\'t be killed. Maybe you need to try as root.'));
+            console.log(chalk.yellow('Process(es) couldn\'t be killed. Maybe you need to try as', (isWin?'administrator':'root') + '.'));
           }
         }
       } else if (res.code === 1){
