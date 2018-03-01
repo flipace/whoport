@@ -1,5 +1,8 @@
 # Change Log
 
+### v0.2.0
+- merged [#4](https://github.com/flipace/whoport/pull/4), thanks @milanorszagh
+
 ### v0.1.2
 - removes --harmony flag (fixes [#3](https://github.com/flipace/whoport/issues/3))
 
