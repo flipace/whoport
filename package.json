@@ -1,6 +1,6 @@
 {
   "name": "whoport",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A simple cli tool to help you identify and kill processes which use a given port.",
   "repository": {
     "type": "git",
