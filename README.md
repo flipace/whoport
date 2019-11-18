@@ -1,7 +1,7 @@
 [![npm version](https://badge.fury.io/js/whoport.svg)](https://badge.fury.io/js/whoport)
 [![GitHub issues](https://img.shields.io/github/issues/flipace/whoport.svg)](https://github.com/flipace/whoport/issues)
 # whoport
-A simple CLI tool to check if and which PID uses a given port number and optionally kill it.
+A simple nodejs based CLI tool to check if and which PID uses a given port number and optionally kill it.
 
 ### Installation
 ```npm i -g whoport```
