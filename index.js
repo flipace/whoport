@@ -24,7 +24,7 @@ program.arguments('<port>')
       const res = exec(command, { silent: true });
 
       if (res.code === 0) {
-        let pid = res.output.trim();
+        let pid = res.stdout.trim();
 
         if (isWin) {
           let lines = pid.split(/\r\n/g);
@@ -39,7 +39,27 @@ program.arguments('<port>')
           pid = pid.split(/\s+/g);
         }
 
-        console.log(`PID: ${chalk.blue.bold(pid.join(', '))} listening on port ${chalk.red.bold(port)}`);
+        const pids = Array.from(new Set(pid)); // remove duplicates
+
+        const pnames = [];
+        for (let i = 0; i < pids.length; i++) {
+          const pid = pids[i];
+          if (!isWin) {
+            const ps = exec(`ps -p ${pid} -o comm=`, { silent: true });
+            if (ps.code === 0) {
+              const pname = ps.stdout.trim();
+              pnames.push(pname);
+            } else {
+              pnames.push('N/A');
+            }
+          }
+        }
+
+        console.log(
+          `PID: ${chalk.blue.bold(pids.join(', '))}\n` +
+          (!isWin ? `Process name: ${chalk.green.bold(pnames.join(', '))}\n` : '') +
+          `Listening on port: ${chalk.red.bold(port)}`
+        );
 
         if (!program.kill) {
           program.kill = yield prompt.confirm(`Do you want to kill the process? (no = default | y):  `);
@@ -51,9 +71,9 @@ program.arguments('<port>')
           let killResult;
 
           if (isWin) {
-            killResult = exec(`taskkill /PID ${pid.join(' /PID ')} /T /F`);
+            killResult = exec(`taskkill /PID ${pids.join(' /PID ')} /T /F`);
           } else {
-            killResult = exec(`kill -9 ${pid.join(' ')}`);
+            killResult = exec(`kill -9 ${pids.join(' ')}`);
           }
 
           if (killResult.code === 0) {
@@ -76,6 +96,6 @@ program.arguments('<port>')
   })
   .parse(process.argv);
 
-  if (typeof(program.args[0]) === 'undefined') {
-    program.help();
-  }
+if (typeof(program.args[0]) === 'undefined') {
+  program.help();
+}

@@ -9,7 +9,7 @@ A simple nodejs based CLI tool to check if and which PID uses a given port numbe
 ### Compatibility
 
 **Tested on:**
-- OSX 10.10.5, 10.11.4
+- macOS 10.10.5, 10.11.4, 10.14.6
 - Windows 7
 - Debian 7.8 (wheezy)
 
@@ -23,7 +23,7 @@ Due to the use of ```netstat``` for Windows operating systems, whoport should al
 ### Usage
 
 ```
-# check and display PID if present
+# check and display PID and process name if present
 whoport 9090
 
 # kill process which uses port
