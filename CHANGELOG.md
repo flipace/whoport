@@ -1,5 +1,15 @@
 # Change Log
 
+### v0.3.0
+- Adds process name to output -> merged [#5](https://github.com/flipace/whoport/pull/5), thanks @BonneVoyager 
+```
+> whoport 8000
+PID: 71937
+Process name: node
+Listening on port: 8000
+Do you want to kill the process? (no = default | y):
+```
+
 ### v0.2.0
 - merged [#4](https://github.com/flipace/whoport/pull/4), thanks @milanorszagh
 
